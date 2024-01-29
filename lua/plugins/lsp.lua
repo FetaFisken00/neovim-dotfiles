@@ -20,6 +20,8 @@ local M = {
     -- adds LSP completion capabilites
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
+    'hrsh7th/cmp-buffer',
 
     -- adds a number of user firendly snippets
     'rafamadriz/friendly-snippets',
@@ -35,8 +37,11 @@ local function on_attach(client, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
   -- vim.lsp.buf.rename
+  map("<F2>", '<cmd>lua vim.lsp.buf.rename()<cr>', 'rename')
   map('K', '<cmd>lua vim.lsp.buf.hover()<cr>')
   map('<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+  map('gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
+  map('gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
   -- vim.lsp.buf.code_action
   -- vim.lsp.buf.signature_help
 
@@ -93,7 +98,6 @@ function M.config()
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
 
   require('luasnip.loaders.from_vscode').lazy_load()
   luasnip.config.setup()

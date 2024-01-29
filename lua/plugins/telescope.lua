@@ -2,7 +2,9 @@ local M = {
   "nvim-telescope/telescope.nvim",
   -- tag = '0.1.0',
   dependencies = {
-    { "nvim-lua/plenary.nvim" }
+    { "nvim-lua/plenary.nvim" },
+    { "xiyaowong/telescope-emoji.nvim" },
+    { "xiyaowong/telescope-glyph.nvim" },
   },
   cmd = { "Telescope" , "Tel" },
   keys = { '<leader>p' },
@@ -14,13 +16,15 @@ function M.config()
   local wk = require('which-key')
   local map = vim.keymap.set
 
-
   map('n', '<leader>pk', builtin.keymaps, {desc = 'keymaps'})
   map('n', '<leader>pf', builtin.find_files, {desc = 'find files'})
   map('n', '<leader>pp', builtin.git_files, {desc = 'git files'})
   map('n', '<leader>ph', builtin.help_tags, {desc = 'help tags'})
   map('n', '<leader>pg', builtin.live_grep, {desc = 'live grep'})
   map('n', '<leader>pb', builtin.buffers, {desc = 'buffers'})
+
+  map('n', '<leader>pe', "<cmd>Telescope emoji<CR>", {desc = 'emojis'})
+  map('n', '<leader>pr', "<cmd>Telescope glyph<CR>", {desc = 'glyphs'})
 
   map('n', '<leader>pd', builtin.diagnostics, {desc = 'diagnostics'})
   map('n', '<leader>pt', builtin.treesitter, {desc = 'treesitter'})
@@ -42,6 +46,21 @@ function M.config()
   end, {desc = 'grep WORD'})
 
   telescope.setup({
+    extensions = {
+      emoji = {
+        action = function(emoji)
+          print("debug" .. emoji)
+          -- argument emoji is a table.
+          -- {name="", value="", cagegory="", description=""}
+
+          -- vim.fn.setreg("*", emoji.value)
+          -- print([[Press p or "*p to paste this emoji]] .. emoji.value)
+
+          -- insert emoji when picked
+          -- vim.api.nvim_put({ emoji.value }, 'c', false, true)
+        end,
+      },
+    },
     defaults = {
       mappings = {
         i = {
@@ -86,7 +105,6 @@ function M.config()
         },
       },
     },
-
   })
 end
 
