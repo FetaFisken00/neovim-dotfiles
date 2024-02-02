@@ -3,7 +3,8 @@ local C = {
 }
 
 function C.config()
-	-- require("oxocarbon").setup({})
+	require("oxocarbon")
+  vim.cmd [[ colorscheme oxocarbon ]]
 end
 
 return C

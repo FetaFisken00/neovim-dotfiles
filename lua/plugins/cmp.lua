@@ -1,6 +1,6 @@
 local M = {
   "hrsh7th/nvim-cmp",
-  event = "InsertEnter",
+  -- event = "InsertEnter",
   dependencies = {
     {
       -- snippet plugin
@@ -47,7 +47,22 @@ local M = {
 
 
 function M.config()
-  require("cmp").setup()
+  require("cmp").setup({
+      snippet = {
+        expand = function(args)
+          require("luasnip").lsp_expand(args.body)
+        end,
+      },
+      sources = {
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "buffer" },
+        { name = "nvim_lua" },
+        { name = "path" },
+      },
+
+    }
+  )
 end
 
 return M
