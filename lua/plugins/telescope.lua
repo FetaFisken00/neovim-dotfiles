@@ -3,8 +3,8 @@ local M = {
   -- tag = '0.1.0',
   dependencies = {
     { "nvim-lua/plenary.nvim" },
-    { "xiyaowong/telescope-emoji.nvim" },
-    { "xiyaowong/telescope-glyph.nvim" },
+    -- { "xiyaowong/telescope-emoji.nvim" },
+    -- { "xiyaowong/telescope-glyph.nvim" },
   },
   cmd = { "Telescope" , "Tel" },
   keys = { '<leader>p' },
