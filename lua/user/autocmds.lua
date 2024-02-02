@@ -32,6 +32,21 @@ autocmd("BufWritePost", {
   command = "lua print('hello')"
 })
 
+augroup("ColorschemeHighlight", { clear = true })
+autocmd("ColorScheme", {
+	pattern = "*",
+  callback = function()
+    bg_color = vim.fn.synIDattr(vim.fn.hlID('Normal'), 'bg', 'gui')
+    bg = vim.api.nvim_get_option('background')
+    if bg == 'light' then
+      vim.cmd [[highlight IndentBlanklineContextStart cterm=NONE gui=NONE guibg=#f0f0f0]]
+      vim.cmd [[highlight IndentBlanklineContextChar guifg=#42464e]]
+    else
+      vim.cmd [[highlight IndentBlanklineContextStart cterm=NONE gui=NONE guibg=#353b45]]
+      vim.cmd [[highlight IndentBlanklineContextChar guifg=#42464e]]
+    end
+  end
+})
 
 -----------------------------------------------------------
 -- Settings for filetypes:
