@@ -33,3 +33,5 @@ require("user.commands")
 require("lazy").setup("plugins") -- loads lua/plugins
 
 ----------------------------------------------[[  End  ]]
+
+require("user.colorscheme")

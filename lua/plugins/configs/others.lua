@@ -1,5 +1,5 @@
 local M = {}
-local utils = require "core.utils"
+local utils = require "user.utils"
 
 M.blankline = {
   indentLine_enabled = 1,
